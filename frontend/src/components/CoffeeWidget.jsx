@@ -105,26 +105,45 @@ function CoffeeWidget(props) {
 
     return (
         <div className="bg-yellow-100 p-4 rounded-lg shadow-md flex justify-center">
-            {props.index in imageMap && (
-                <div>
-                    <img
-                        src={imageMap[props.index]}
-                        alt="Coffee"
-                        className="mt-2 rounded-md"
-                        style={{ width: "150px", height: "150px" }}
-                    />
-                    <p className="text-lg font-semibold mt-4">{nameMap[props.index]}</p>
-                    <p className="text-lg mt-4">${priceMap[props.index]}</p>
-                    <div className="flex items-center mt-4">
-                        <button className="border border-black py-2 px-4 rounded-lg mr-2" onClick={handleDecrease}>-</button>
-                        <p className="text-lg">{amount}</p>
-                        <button className="border border-black py-2 px-4 rounded-lg ml-2" onClick={handleIncrease}>+</button>
-                    </div>
-                    <button className="border border-black py-2 px-4 rounded-lg mt-4" onClick={() => props.addToCart(props.index, amount)}>Add to Cart</button>                    
-                </div>
+          {props.index in imageMap && (
+            <div>
+            {props.showImage && ( 
+              <img
+                src={imageMap[props.index]}
+                alt="Coffee"
+                className="mt-2 rounded-md"
+                style={{ width: "150px", height: "150px" }}
+              />
             )}
+              <p className="text-lg font-semibold mt-4">{nameMap[props.index]}</p>
+              
+              {
+                props.showAmount && (
+                    <p className="text-lg mt-4">Amount: {props.showAmount}</p>
+                )
+              }
+
+              {
+                props.showTotal ? (
+                    <p className="text-lg mt-4">Total Price: ${props.showTotal.toFixed(2)}</p>
+                ) : (
+                    <p className="text-lg mt-4">${priceMap[props.index]}</p>
+                )
+              }
+              {props.showAdd && ( 
+                <div>
+                  <div className="flex items-center mt-4">
+                    <button className="border border-black py-2 px-4 rounded-lg mr-2" onClick={handleDecrease}>-</button>
+                    <p className="text-lg">{amount}</p>
+                    <button className="border border-black py-2 px-4 rounded-lg ml-2" onClick={handleIncrease}>+</button>
+                  </div>
+                  <button className="border border-black py-2 px-4 rounded-lg mt-4" onClick={() => props.addToCart(props.index, amount)}>Add to Cart</button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-    );
+      );      
 }
 
 export default CoffeeWidget;

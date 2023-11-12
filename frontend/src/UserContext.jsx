@@ -8,10 +8,13 @@ const UserProvider = ({ children }) => {
     fullname: null,
     email: null,
     id:null,
+    cartlist: [],
+    cart: [],
   };
 
   const [userData, setUserData] = useState(initialUserData);
 
+  
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
       {children}
